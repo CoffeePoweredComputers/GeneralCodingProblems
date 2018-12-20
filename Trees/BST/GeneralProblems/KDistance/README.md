@@ -1,0 +1,2 @@
+# K distance from root
+The following problem was taken from [https://practice.geeksforgeeks.org/problems/k-distance-from-root/1/?ref=self](this "K Distance") Geeks4Geeks page. It finds and prints all nodes that are k disnace from the root via a level

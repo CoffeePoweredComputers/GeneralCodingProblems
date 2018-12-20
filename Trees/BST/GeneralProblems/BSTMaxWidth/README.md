@@ -1,0 +1,2 @@
+# Maximum Width of a Binary Tree
+The following program contains a very basic implementation of a binary tree that supports the adding of elements. The core purpose of the program is to calculate the maximum horizontal width of a binary tree. This is done by performing a level order traversal of a tree and taking the queue size at each iteration. The size of the queue is proportional to the number of nodes at that level. 
