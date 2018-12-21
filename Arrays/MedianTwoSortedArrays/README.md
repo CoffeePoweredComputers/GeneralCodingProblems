@@ -1,0 +1,2 @@
+# Median of Two Sorted Arrays 
+This class and its containted method find the median of two sorted arrarys through a linear sum. Hence both the time and space complexity of this algorithm is O(n+k) where n and k are length of the first and second array respecivly.

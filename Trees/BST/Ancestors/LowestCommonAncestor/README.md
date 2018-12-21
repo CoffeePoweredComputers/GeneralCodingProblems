@@ -1,0 +1,2 @@
+# Lowest Common Ancestor
+This class and its internal method find the lowest common ancestor of two given elements in a binary tree. This probem was taken from the following [https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/submissions/](LeetCode "LeetCode Page") post.
