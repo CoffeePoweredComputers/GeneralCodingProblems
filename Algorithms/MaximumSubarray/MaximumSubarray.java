@@ -10,6 +10,30 @@ import java.lang.Math;
 
 class MaximumSubarray{
 
+
+	static public int [] bruteMaxSub(int[] a, int low, int high){
+		int left = 0;
+		int right = 0;
+		int sum = Integer.MAX_VALUE * -1;
+
+		for(int i = low; i < high; i++){
+			int current_sum = 0;
+
+			for(int j = i; j < high; j++){
+				current_sum += a[j];
+
+				if(sum < current_sum){
+					sum = current_sum;
+					left = i;
+					right = j;
+				}
+			}
+		}
+
+		int [] results = {left, right, sum};
+		return results;
+	}
+	
 	//Return Values:
 	//a[0]: max-left
 	//a[1]: max-right
@@ -17,7 +41,7 @@ class MaximumSubarray{
 	static public int [] findMaxCrossingSubarray(int[] a, int low, int mid, int high){
 		
 		//we got some values up in here
-		int left_sum = Integer.MAX_VALUE;
+		int left_sum = Integer.MIN_VALUE;
 		int right_sum = Integer.MIN_VALUE;
 		int sum = 0;
 		int max_left = 0; 
@@ -26,7 +50,7 @@ class MaximumSubarray{
 
 
 		//go from mid down ta low
-		for(int i = mid; i > low; i--){
+		for(int i = mid; i >= low; i--){
 			sum += a[i];
 			if(sum > left_sum){
 				left_sum = sum;
@@ -36,7 +60,7 @@ class MaximumSubarray{
 
 		//go from mid up to high
 		sum = 0;
-		for(int j = mid; j < high; j++){
+		for(int j = mid + 1; j <= high; j++){
 			sum += a[j];
 			if(sum > right_sum){
 				right_sum = sum;
@@ -91,38 +115,49 @@ class MaximumSubarray{
 	}
 
 	static public void main(String [] args){
-
-		//generate an array
-		int [] rand_arr = new int[150];
-		Random rand = new Random(System.currentTimeMillis());
-		for(int i = 0; i < rand_arr.length; i++){
-			rand_arr[i] = rand.nextInt(1000);
-		}
+		
+		int [] arr = {100, 113, 110, 85, 105, 102, 86, 63, 81, 101, 94, 106, 101, 79, 94, 90, 97};
 
 		//print it 
 		System.out.print("A = [ ");
-		for(int n: rand_arr){
+		for(int n: arr){
 			System.out.printf(" %d ",n);
 		}
 		System.out.println("]");
 
 		//get the array of differences
-		for(int i = 1; i < rand_arr.length; i++){
-			rand_arr[i] = rand_arr[i] - rand_arr[i - 1];
+		int [] arr_p = new int[arr.length - 1];
+		for(int i = 1; i < arr.length; i++){
+			arr_p[i-1] = arr[i] - arr[i - 1];
+
+			//uncomment to simlulate all negatives
+			//if(rand_arr[i] > 0){
+			//	rand_arr[i] *= -1;
+			//}
+	
 		}
+	
 		
+	
+		
+
 		//print it 
 		System.out.print("A' = [ ");
-		for(int n: rand_arr){
+		for(int n: arr_p){
 			System.out.printf(" %d ",n);
 		}
 		System.out.println("]");
 
 		//pass it to the algorithm to compute the optimum buy/sell date
-		int [] results = findMaxSub(rand_arr,0,rand_arr.length-1);
+		int [] results = findMaxSub(arr_p,0,arr_p.length-1);
 
 
 		//print the results
-		System.out.printf("Buy: %d\nSell: %d\nSum: %d\n",results[0],results[1],results[2]);
+		System.out.printf("RECURSIVE:\n\nBuy: %d\nSell: %d\nSum: %d\n",results[0],results[1],results[2]);
+		
+		
+		results = bruteMaxSub(arr_p,0,arr_p.length-1);
+
+		System.out.printf("BRUTE FORCE:\n\nBuy: %d\nSell: %d\nSum: %d\n",results[0],results[1],results[2]);
 	}
 }
